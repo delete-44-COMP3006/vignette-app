@@ -1,4 +1,5 @@
 import './App.scss';
+import Index from './components/index.component';
 
 function App() {
   return (
@@ -6,6 +7,8 @@ function App() {
       <h1>
         Vignette
       </h1>
+
+      <Index />
     </div>
   );
 }
