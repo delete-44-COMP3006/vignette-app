@@ -2,7 +2,7 @@ import http from "../http-common";
 
 class SubmissionDataService {
   index() {
-    return http.get("/films");
+    return http.get("/submissions");
   }
 }
 
