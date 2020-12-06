@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SubmissionDataService from "../services/submission.service";
 import Card from "react-bootstrap/Card";
+import CardColumns from "react-bootstrap/CardColumns";
 
 function Index(props) {
   // Define callbacks for GETting and SETting the component state
@@ -25,7 +26,7 @@ function Index(props) {
 
   return (
     <div className="w-75 ml-auto mr-auto">
-      <div className="d-flex justify-content-around flex-wrap">
+      <CardColumns>
         {submissions &&
           submissions.map((submission, index) => (
             <Card
@@ -34,7 +35,9 @@ function Index(props) {
               key={submission._id}
             >
               <Card.Body>
-                <Card.Title>{submission.title}</Card.Title>
+                <Card.Title>
+                  <Link to={`/read/${submission._id}`}>{submission.title}</Link>
+                </Card.Title>
                 <Card.Text>
                   {submission.content.length > 300
                     ? `${submission.content.substr(0, 299)}...`
@@ -45,7 +48,7 @@ function Index(props) {
               </Card.Body>
             </Card>
           ))}
-      </div>
+      </CardColumns>
     </div>
   );
 }

@@ -1,12 +1,26 @@
-
 @import "custom";
-@import url('https://fonts.googleapis.com/css2?family=Khula:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Khula:wght@300&display=swap");
 
 body {
-  font-family: 'Khula', sans-serif;
+  font-family: "Khula", sans-serif;
+  line-height: 1.6;
 }
 
 .banner-title {
   font-size: 6rem;
   text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.card-columns {
+  column-count: 4;
+  column-gap: 1.25rem;
+}
+
+.card-columns .card {
+  display: inline-block;
+  width: 100%;
 }

@@ -1,13 +1,13 @@
 import "./App.scss";
 import Index from "./components/index.component";
 import Show from "./components/show.component";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 
 function App() {
   return (
     <BrowserRouter>
-      <div>
-        <h1 className="banner-title">Vignette</h1>
+      <div className="banner-title">
+        <Link to='/' className="banner-title">Vignette</Link>
       </div>
 
       <Switch>
