@@ -1,15 +1,20 @@
-import './App.scss';
-import Index from './components/index.component';
+import "./App.scss";
+import Index from "./components/index.component";
+import Show from "./components/show.component";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <div>
-      <h1 class="banner-title">
-        Vignette
-      </h1>
+    <BrowserRouter>
+      <div>
+        <h1 className="banner-title">Vignette</h1>
+      </div>
 
-      <Index />
-    </div>
+      <Switch>
+        <Route path="/read/:id" children={<Show />} />
+        <Route exact path="/" component={Index} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
