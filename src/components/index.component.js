@@ -40,7 +40,8 @@ function Index(props) {
                     ? `${submission.content.substr(0, 299)}...`
                     : submission.content}
                 </Card.Text>
-                <Link to={`/read/${submission._id}`}>Edit Project</Link>
+
+                <Link to={`/read/${submission._id}`}>Read</Link>
               </Card.Body>
             </Card>
           ))}
