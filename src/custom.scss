@@ -1,5 +1,23 @@
-$theme-colors: (
-  "primary": #FF8552
-);
+$primary: #f5b342;
+$dark: #424242;
 
-@import "~bootstrap/scss/bootstrap";
+$body-bg: $dark;
+$body-color: $primary;
+$card-color: $dark;
+$card-bg: #fffbee;
+
+$table-bg-scale: -50%;
+
+// Import Bootstrap
+@import '~bootstrap/scss/bootstrap.scss';
+
+.card-title {
+  border-bottom: 1px solid $primary;
+  font-size: 2rem;
+}
+
+.card-text, .card-title {
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -4,7 +4,7 @@ import Index from './components/index.component';
 function App() {
   return (
     <div>
-      <h1>
+      <h1 class="banner-title">
         Vignette
       </h1>
 

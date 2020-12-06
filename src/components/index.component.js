@@ -23,16 +23,14 @@ function Index(props) {
   }, [retrieveSubmissions]);
 
   return (
-    <div>
-      <h1>Submissions</h1>
-
-      <div className="d-flex">
+    <div class="w-75 ml-auto mr-auto">
+      <div className="d-flex justify-content-around flex-wrap">
         {submissions &&
           submissions.map((submission, index) => (
-            <Card style={{ maxWidth: "18rem" }} className="border-primary mb-3">
+            <Card style={{ maxWidth: "21rem" }} className="mb-3">
               <Card.Body>
                 <Card.Title>{submission.title}</Card.Title>
-                <Card.Text>{submission.content}</Card.Text>
+                <Card.Text>{(submission.content.length > 300) ? `${submission.content.substr(0, 299)}...` : submission.content}</Card.Text>
               </Card.Body>
             </Card>
           ))}
