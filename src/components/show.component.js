@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import SubmissionDataService from "../services/submission.service";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
+import "../scss/show.scss";
 
 function Show(props) {
   let { id } = useParams();
@@ -30,11 +31,13 @@ function Show(props) {
   }, [retrieveSubmission]);
 
   return (
-    <div className="w-75 ml-auto mr-auto text-center">
+    <div className="w-50 ml-auto mr-auto">
       {title ? (
         <div>
-          <h1>{title}</h1>
-          <p>{content}</p>
+          <h1 className="submission-title">{title}</h1>
+          <p className="submission-content text-center">{content}</p>
+
+          <Link to="/" style={{fontSize: "1.25rem"}}>Return</Link>
         </div>
       ) : (
         <Spinner animation="border" role="status">

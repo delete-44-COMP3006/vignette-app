@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import SubmissionDataService from "../services/submission.service";
 import Card from "react-bootstrap/Card";
 import CardColumns from "react-bootstrap/CardColumns";
+import "../scss/index.scss";
 
 function Index(props) {
   // Define callbacks for GETting and SETting the component state
@@ -39,7 +40,7 @@ function Index(props) {
                   <Link to={`/read/${submission._id}`}>{submission.title}</Link>
                 </Card.Title>
                 <Card.Text>
-                  {submission.content.length > 300
+                  {submission.content && submission.content.length > 300
                     ? `${submission.content.substr(0, 299)}...`
                     : submission.content}
                 </Card.Text>

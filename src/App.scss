@@ -4,6 +4,7 @@
 body {
   font-family: "Khula", sans-serif;
   line-height: 1.6;
+  font-size: 1.25rem;
 }
 
 .banner-title {
@@ -15,12 +16,6 @@ a {
   text-decoration: none;
 }
 
-.card-columns {
-  column-count: 4;
-  column-gap: 1.25rem;
-}
-
-.card-columns .card {
-  display: inline-block;
-  width: 100%;
+nav {
+  margin-left: 12.5%;
 }
