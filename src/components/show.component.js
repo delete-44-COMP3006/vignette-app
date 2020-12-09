@@ -31,11 +31,11 @@ function Show(props) {
   }, [retrieveSubmission]);
 
   return (
-    <div className="w-50 ml-auto mr-auto">
+    <div className="w-75 ml-auto mr-auto text-center">
       {title ? (
         <div>
           <h1 className="submission-title">{title}</h1>
-          <p className="submission-content text-center">{content}</p>
+          <p className="submission-content">{content}</p>
 
           <Link to="/" style={{fontSize: "1.25rem"}}>Return</Link>
         </div>

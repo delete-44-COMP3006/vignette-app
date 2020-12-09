@@ -12,7 +12,7 @@ function App() {
           <Link to='/'>Vignette</Link>
         </div>
 
-        <Link to='/write' className="">Get Writing!</Link>
+        <Link to='/write' style={{fontSize: '2rem'}}>Get Writing!</Link>
       </nav>
 
 
