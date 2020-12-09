@@ -1,4 +1,5 @@
 $primary: #f5b342;
+$primary-darken: #c48f35;
 $dark: #424242;
 $light: #fffbee;
 
@@ -24,4 +25,12 @@ $table-bg-scale: -50%;
   white-space: pre-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.btn-primary {
+  color: $dark;
+
+  &:hover {
+    color: $primary-darken;
+  }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import "../scss/new.scss";
 
 function New(props) {
@@ -57,6 +58,8 @@ function New(props) {
 
           <Form.Text className="float-right">{wordCount}/500</Form.Text>
         </Form.Group>
+
+        <Button type="submit" className="w-100">Submit!</Button>
       </Form>
     </div>
   );
