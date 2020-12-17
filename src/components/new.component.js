@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import SubmissionDataService from "../services/submission.service";
+import { useHistory } from "react-router-dom";
 import "../scss/new.scss";
 
 function New(props) {
@@ -8,6 +10,8 @@ function New(props) {
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [wordCount, setWordCount] = useState(0);
+
+  const history = useHistory();
 
   // Callback to update the displayed submission
   const updateContent = useCallback(
@@ -21,9 +25,23 @@ function New(props) {
     [setContent, setWordCount]
   );
 
+  const createSubmission = useCallback((e) => {
+    e.preventDefault();
+    let params = {
+      title: title,
+      content: content,
+    };
+
+    const response = SubmissionDataService.create(params);
+
+    response.then((sub) => {
+      history.push(`/read/${sub.data._id}`)
+    });
+  }, [title, content, history]);
+
   return (
     <div className="w-75 ml-auto mr-auto">
-      <Form>
+      <Form onSubmit={createSubmission}>
         <Form.Group>
           <Form.Control
             type="text"
@@ -59,7 +77,9 @@ function New(props) {
           <Form.Text className="float-right">{wordCount}/500</Form.Text>
         </Form.Group>
 
-        <Button type="submit" className="w-100">Submit!</Button>
+        <Button type="submit" className="w-100">
+          Submit!
+        </Button>
       </Form>
     </div>
   );
