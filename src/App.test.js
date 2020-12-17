@@ -3,6 +3,8 @@ import App from './App';
 
 test('renders learn react link', () => {
   render(<App />);
-  const linkElement = screen.getByText(/Vignette/i);
-  expect(linkElement).toBeInTheDocument();
+
+  // Confirm navigation bar is always present
+  expect(screen.getByText("Vignette")).toBeInTheDocument();
+  expect(screen.getByText("Get Writing!")).toBeInTheDocument();
 });

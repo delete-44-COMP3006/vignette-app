@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import Index from "../components/index.component";
 import { act } from "react-dom/test-utils";
 import http from "../http-common";
-import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 
 describe("Index component", () => {
@@ -23,6 +22,7 @@ describe("Index component", () => {
   ];
 
   beforeEach(() => {
+    // In each test, stub any GET requests made through the http module with fake notebooks
     jest.spyOn(http, "get").mockImplementation(() =>
       Promise.resolve({
         data: submissions,
@@ -31,6 +31,7 @@ describe("Index component", () => {
   });
 
   afterEach(() => {
+    // To ensure atomic testing, remove mock functionality after each test
     http.get.mockRestore();
   });
 
