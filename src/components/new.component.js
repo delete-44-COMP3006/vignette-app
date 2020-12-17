@@ -37,7 +37,7 @@ function New(props) {
     response.then((sub) => {
       history.push(`/read/${sub.data._id}`)
     });
-  }, [title, content]);
+  }, [title, content, history]);
 
   return (
     <div className="w-75 ml-auto mr-auto">

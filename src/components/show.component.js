@@ -15,7 +15,7 @@ function Show(props) {
   const retrieveSubmission = useCallback(() => {
     SubmissionDataService.get(id)
       .then((response) => {
-        const submission = response.data[0];
+        const submission = response.data;
 
         setTitle(submission.title);
         setContent(submission.content);
