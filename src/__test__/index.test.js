@@ -22,7 +22,7 @@ describe("Index component", () => {
   ];
 
   beforeEach(() => {
-    // In each test, stub any GET requests made through the http module with fake notebooks
+    // In each test, stub any GET requests made through the http module with fake submissions
     jest.spyOn(http, "get").mockImplementation(() =>
       Promise.resolve({
         data: submissions,
@@ -35,7 +35,7 @@ describe("Index component", () => {
     http.get.mockRestore();
   });
 
-  test("rendering a cart for each submission", async () => {
+  test("rendering a card for each submission", async () => {
     // Use the asynchronous version of act to apply resolved promises
     await act(async () => {
       render(
