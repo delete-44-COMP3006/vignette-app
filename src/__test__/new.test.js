@@ -1,42 +1,10 @@
 import { render, screen } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 import New from "../components/new.component";
 import http from "../http-common";
 import userEvent from "@testing-library/user-event";
 
 describe("New component", () => {
-  const id = 1;
-  const content = "1".repeat(500);
-
-  const successfulResponse = {
-    code: 200,
-    _id: id,
-  };
-
-  const submission = {
-    title: "Submission 1",
-    content: content,
-    _id: id,
-  };
-
-  beforeEach(() => {
-    jest.spyOn(http, "post").mockImplementation(() =>
-      Promise.resolve({
-        data: successfulResponse,
-      })
-    );
-
-    jest.spyOn(http, "get").mockImplementation(() =>
-      Promise.resolve({
-        data: submission,
-      })
-    );
-  });
-
-  afterEach(() => {
-    http.post.mockRestore();
-    http.get.mockRestore();
-  });
-
   const clear = (field) => {
     userEvent.type(field, "{selectall}{backspace}");
     expect(field.value).toEqual("");
@@ -89,5 +57,35 @@ describe("New component", () => {
     // Confirm words broken by new lines increase the word count
     userEvent.type(contentsField, "Three{enter}more{enter}words");
     expect(screen.getByText("3/500")).toBeInTheDocument();
+  });
+
+  describe("Unsuccessful submissions", () => {
+    const unsuccessfulResponse = {
+      response: {
+        data: ["Test error message"],
+      },
+    };
+
+    beforeEach(() => {
+      jest
+        .spyOn(http, "post")
+        .mockImplementation(() => Promise.reject(unsuccessfulResponse));
+    });
+
+    afterEach(() => {
+      http.post.mockRestore();
+    });
+
+    test("rendering error messages", async () => {
+      render(<New />);
+
+      const submitButton = screen.getByText("Submit!");
+
+      await act(async () => {
+        userEvent.click(submitButton);
+      });
+
+      expect(screen.getByText("Test error message")).toBeInTheDocument();
+    });
   });
 });

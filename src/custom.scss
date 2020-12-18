@@ -14,14 +14,15 @@ $form-text-color: $primary;
 $table-bg-scale: -50%;
 
 // Import Bootstrap
-@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/scss/bootstrap.scss";
 
 .card-title {
   border-bottom: 1px solid $primary;
   font-size: 2rem;
 }
 
-.card-text, .card-title {
+.card-text,
+.card-title {
   white-space: pre-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
