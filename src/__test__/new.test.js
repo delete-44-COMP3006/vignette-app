@@ -4,39 +4,6 @@ import http from "../http-common";
 import userEvent from "@testing-library/user-event";
 
 describe("New component", () => {
-  const id = 1;
-  const content = "1".repeat(500);
-
-  const successfulResponse = {
-    code: 200,
-    _id: id,
-  };
-
-  const submission = {
-    title: "Submission 1",
-    content: content,
-    _id: id,
-  };
-
-  beforeEach(() => {
-    jest.spyOn(http, "post").mockImplementation(() =>
-      Promise.resolve({
-        data: successfulResponse,
-      })
-    );
-
-    jest.spyOn(http, "get").mockImplementation(() =>
-      Promise.resolve({
-        data: submission,
-      })
-    );
-  });
-
-  afterEach(() => {
-    http.post.mockRestore();
-    http.get.mockRestore();
-  });
-
   const clear = (field) => {
     userEvent.type(field, "{selectall}{backspace}");
     expect(field.value).toEqual("");
