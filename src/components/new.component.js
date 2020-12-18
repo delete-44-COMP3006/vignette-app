@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 import SubmissionDataService from "../services/submission.service";
 import { useHistory } from "react-router-dom";
 import "../scss/new.scss";
@@ -10,6 +11,7 @@ function New(props) {
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [wordCount, setWordCount] = useState(0);
+  const [errors, setErrors] = useState([]);
 
   const history = useHistory();
 
@@ -34,13 +36,20 @@ function New(props) {
 
     const response = SubmissionDataService.create(params);
 
-    response.then((sub) => {
-      history.push(`/read/${sub.data._id}`)
+    response.then((submission) => {
+      history.push(`/read/${submission.data._id}`)
+    }).catch((error) => {
+      setErrors(error.response.data)
     });
   }, [title, content, history]);
 
   return (
     <div className="w-75 ml-auto mr-auto">
+        {errors &&
+          errors.map((error) => (
+            <Alert variant="danger" key={error} dismissable>{error}</Alert>
+          ))}
+
       <Form onSubmit={createSubmission}>
         <Form.Group>
           <Form.Control
