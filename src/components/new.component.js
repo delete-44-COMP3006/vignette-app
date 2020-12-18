@@ -27,28 +27,35 @@ function New(props) {
     [setContent, setWordCount]
   );
 
-  const createSubmission = useCallback((e) => {
-    e.preventDefault();
-    let params = {
-      title: title,
-      content: content,
-    };
+  const createSubmission = useCallback(
+    (e) => {
+      e.preventDefault();
+      let params = {
+        title: title,
+        content: content,
+      };
 
-    const response = SubmissionDataService.create(params);
+      const response = SubmissionDataService.create(params);
 
-    response.then((submission) => {
-      history.push(`/read/${submission.data._id}`)
-    }).catch((error) => {
-      setErrors(error.response.data)
-    });
-  }, [title, content, history]);
+      response
+        .then((submission) => {
+          history.push(`/read/${submission.data._id}`);
+        })
+        .catch((error) => {
+          setErrors(error.response.data);
+        });
+    },
+    [title, content, history]
+  );
 
   return (
     <div className="w-75 ml-auto mr-auto">
-        {errors &&
-          errors.map((error) => (
-            <Alert variant="danger" key={error} dismissable>{error}</Alert>
-          ))}
+      {errors &&
+        errors.map((error) => (
+          <Alert variant="danger" key={error}>
+            {error}
+          </Alert>
+        ))}
 
       <Form onSubmit={createSubmission}>
         <Form.Group>
