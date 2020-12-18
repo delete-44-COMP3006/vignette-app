@@ -7,7 +7,7 @@ class SubmissionDataService {
   }
 
   get(id) {
-    return http.get(`/submissions/${id}`)
+    return http.get(`/submissions/${id}`);
   }
 
   create(body) {

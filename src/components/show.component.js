@@ -37,11 +37,12 @@ function Show(props) {
           <h1 className="submission-title">{title}</h1>
           <p className="submission-content">{content}</p>
 
-          <Link to="/" style={{fontSize: "1.25rem"}}>Return</Link>
+          <Link to="/" style={{ fontSize: "1.25rem" }}>
+            Return
+          </Link>
         </div>
       ) : (
-        <Spinner animation="border" role="status">
-        </Spinner>
+        <Spinner animation="border" role="status"></Spinner>
       )}
     </div>
   );

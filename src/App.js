@@ -9,12 +9,13 @@ function App() {
     <BrowserRouter>
       <nav className="d-inline-flex align-items-center justify-content-between w-75">
         <div className="banner-title">
-          <Link to='/'>Vignette</Link>
+          <Link to="/">Vignette</Link>
         </div>
 
-        <Link to='/write' style={{fontSize: '2rem'}}>Get Writing!</Link>
+        <Link to="/write" style={{ fontSize: "2rem" }}>
+          Get Writing!
+        </Link>
       </nav>
-
 
       <Switch>
         <Route path="/write" component={New} />
