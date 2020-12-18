@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 import New from "../components/new.component";
 import http from "../http-common";
 import userEvent from "@testing-library/user-event";
@@ -56,5 +57,35 @@ describe("New component", () => {
     // Confirm words broken by new lines increase the word count
     userEvent.type(contentsField, "Three{enter}more{enter}words");
     expect(screen.getByText("3/500")).toBeInTheDocument();
+  });
+
+  describe("Unsuccessful submissions", () => {
+    const unsuccessfulResponse = {
+      response: {
+        data: ["Test error message"],
+      },
+    };
+
+    beforeEach(() => {
+      jest
+        .spyOn(http, "post")
+        .mockImplementation(() => Promise.reject(unsuccessfulResponse));
+    });
+
+    afterEach(() => {
+      http.post.mockRestore();
+    });
+
+    test("rendering error messages", async () => {
+      render(<New />);
+
+      const submitButton = screen.getByText("Submit!");
+
+      await act(async () => {
+        userEvent.click(submitButton);
+      });
+
+      expect(screen.getByText("Test error message")).toBeInTheDocument();
+    });
   });
 });
