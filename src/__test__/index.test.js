@@ -7,6 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 describe("Index component", () => {
   const content1 = "1".repeat(200);
   const content2 = "2".repeat(301);
+  const content3 = "Content";
+  const summary = "Summary";
 
   const submissions = [
     {
@@ -19,6 +21,12 @@ describe("Index component", () => {
       content: content2,
       _id: 2,
     },
+    {
+      title: "Submission 3",
+      content: content3,
+      summary: summary,
+      _id: 3,
+    }
   ];
 
   beforeEach(() => {
@@ -48,11 +56,15 @@ describe("Index component", () => {
     // Confirm all cards are rendered
     expect(screen.getByText("Submission 1")).toBeInTheDocument();
     expect(screen.getByText("Submission 2")).toBeInTheDocument();
-    expect(screen.getAllByText("Read").length).toBe(2);
+    expect(screen.getByText("Submission 3")).toBeInTheDocument();
+
+    expect(screen.getAllByText("Read").length).toBe(3);
 
     // Confirm long contents are trimmed down to 300 characters
     expect(screen.getByText(content1)).toBeInTheDocument();
     expect(screen.queryByText(content2)).not.toBeInTheDocument();
     expect(screen.getByText(`${"2".repeat(300)}...`)).toBeInTheDocument();
+    expect(screen.queryByText(content3)).not.toBeInTheDocument();
+    expect(screen.queryByText(summary)).toBeInTheDocument();
   });
 });
