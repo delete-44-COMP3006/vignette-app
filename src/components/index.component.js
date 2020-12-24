@@ -40,7 +40,9 @@ function Index(props) {
                   <Link to={`/read/${submission._id}`}>{submission.title}</Link>
                 </Card.Title>
                 <Card.Text>
-                  {submission.content && submission.content.length > 300
+                  {submission.summary
+                    ? submission.summary
+                    : submission.content && submission.content.length > 300
                     ? `${submission.content.substr(0, 300)}...`
                     : submission.content}
                 </Card.Text>

@@ -32,6 +32,7 @@ function New(props) {
       e.preventDefault();
       let params = {
         title: title,
+        summary: summary,
         content: content,
       };
 
@@ -45,7 +46,7 @@ function New(props) {
           setErrors(error.response.data);
         });
     },
-    [title, content, history]
+    [title, summary, content, history]
   );
 
   return (
