@@ -10,6 +10,7 @@ describe("Show component", () => {
 
   const submission = {
     title: "Submission 1",
+    summary: "Summary 1",
     content: content,
     _id: id,
   };
@@ -42,6 +43,7 @@ describe("Show component", () => {
 
     // Confirm full, untrimmed text is rendered
     expect(screen.getByText("Submission 1")).toBeInTheDocument();
+    expect(screen.queryByText("Summary 1")).toBeNull();
     expect(screen.getByText(content)).toBeInTheDocument();
     expect(screen.getByText("Return")).toBeInTheDocument();
   });
