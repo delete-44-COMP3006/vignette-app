@@ -1,10 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { Link } from "react-router-dom";
 import SubmissionDataService from "../services/submission.service";
-import Card from "react-bootstrap/Card";
+import SubmissionCard from "./submission-card.component";
 import CardColumns from "react-bootstrap/CardColumns";
-import Up from "./icons/up.icon";
-import Down from "./icons/down.icon";
 import "../scss/index.scss";
 
 function Index(props) {
@@ -43,24 +40,12 @@ function Index(props) {
       <CardColumns>
         {submissions &&
           submissions.map((submission, index) => (
-            <Card
-              style={{ maxWidth: "21rem" }}
-              className="mb-3"
+            <SubmissionCard
+              id={submission._id}
+              title={submission.title}
+              body={summaryFor(submission)}
               key={submission._id}
-            >
-              <Card.Body>
-                <Card.Title>
-                  <Link to={`/read/${submission._id}`}>{submission.title}</Link>
-                </Card.Title>
-                <Card.Text>{summaryFor(submission)}</Card.Text>
-
-                <span className="d-inline-flex justify-content-around w-100">
-                  <Up size="24" filled />
-                  <Link to={`/read/${submission._id}`}>Read</Link>
-                  <Down size="24" filled />
-                </span>
-              </Card.Body>
-            </Card>
+            />
           ))}
       </CardColumns>
     </div>
