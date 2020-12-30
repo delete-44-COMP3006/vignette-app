@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import SubmissionDataService from "../services/submission.service";
 import Card from "react-bootstrap/Card";
 import CardColumns from "react-bootstrap/CardColumns";
+import Up from "./icons/up.icon";
+import Down from "./icons/down.icon";
 import "../scss/index.scss";
 
 function Index(props) {
@@ -50,11 +52,13 @@ function Index(props) {
                 <Card.Title>
                   <Link to={`/read/${submission._id}`}>{submission.title}</Link>
                 </Card.Title>
-                <Card.Text>
-                  {summaryFor(submission)}
-                </Card.Text>
+                <Card.Text>{summaryFor(submission)}</Card.Text>
 
-                <Link to={`/read/${submission._id}`}>Read</Link>
+                <span className="d-inline-flex justify-content-around w-100">
+                  <Up size="24" />
+                  <Link to={`/read/${submission._id}`}>Read</Link>
+                  <Down size="24" />
+                </span>
               </Card.Body>
             </Card>
           ))}
