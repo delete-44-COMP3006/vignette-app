@@ -55,9 +55,9 @@ function Index(props) {
                 <Card.Text>{summaryFor(submission)}</Card.Text>
 
                 <span className="d-inline-flex justify-content-around w-100">
-                  <Up size="24" />
+                  <Up size="24" filled />
                   <Link to={`/read/${submission._id}`}>Read</Link>
-                  <Down size="24" />
+                  <Down size="24" filled />
                 </span>
               </Card.Body>
             </Card>
