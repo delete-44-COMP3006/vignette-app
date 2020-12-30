@@ -18,7 +18,7 @@ function App() {
       </nav>
 
       <Switch>
-        <Route path="/write" component={New} />
+        <Route exact path="/write" component={New} />
         <Route path="/read/:id" children={<Show />} />
         <Route exact path="/" component={Index} />
       </Switch>
