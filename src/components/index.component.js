@@ -20,6 +20,17 @@ function Index(props) {
       });
   }, [setSubmissions]);
 
+  // Helper function to find the summary text for the submission
+  const summaryFor = (submission) => {
+    if (submission.summary) {
+      return submission.summary;
+    } else if (submission.content.length > 300) {
+      return `${submission.content.substr(0, 300)}...`;
+    } else {
+      return submission.content;
+    }
+  };
+
   // Fetch list of submissions on load
   useEffect(() => {
     retrieveSubmissions();
@@ -40,11 +51,7 @@ function Index(props) {
                   <Link to={`/read/${submission._id}`}>{submission.title}</Link>
                 </Card.Title>
                 <Card.Text>
-                  {submission.summary
-                    ? submission.summary
-                    : submission.content && submission.content.length > 300
-                    ? `${submission.content.substr(0, 300)}...`
-                    : submission.content}
+                  {summaryFor(submission)}
                 </Card.Text>
 
                 <Link to={`/read/${submission._id}`}>Read</Link>
