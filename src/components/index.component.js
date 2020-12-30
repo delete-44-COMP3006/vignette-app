@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from "react";
 import SubmissionDataService from "../services/submission.service";
 import SubmissionCard from "./submission-card.component";
 import CardColumns from "react-bootstrap/CardColumns";
-import "../scss/index.scss";
 
 function Index(props) {
   // Define callbacks for GETting and SETting the component state
