@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Up from "./icons/up.icon";
@@ -7,8 +7,8 @@ import "../scss/submission-card.scss";
 
 function SubmissionCard(props) {
   // Define callbacks for GETting and SETting the votes
-  const [hasVoted, setHasVoted] = useState(false);
-  const [votedUp, setVotedUp] = useState(false);
+  const [hasVoted, setHasVoted] = useState(localStorage.getItem(`${props.id}VotedUp`) !== null);
+  const [votedUp, setVotedUp] = useState(localStorage.getItem(`${props.id}VotedUp`) === "true");
 
   const vote = (isVoteUp) => {
     // If user has voted on this card previously and are making the same vote again, remove their vote
@@ -16,6 +16,15 @@ function SubmissionCard(props) {
     setHasVoted(hasVoted ? isVoteUp !== votedUp : true);
     setVotedUp(isVoteUp)
   }
+
+  useEffect(() => {
+    // When users voting status for this card changes, update or remove their vote from localStorage
+    if (hasVoted) {
+      localStorage.setItem(`${props.id}VotedUp`, votedUp)
+    } else {
+      localStorage.removeItem(`${props.id}VotedUp`)
+    }
+  }, [votedUp, hasVoted, props.id])
 
   return (
     <Card style={{ maxWidth: "21rem" }} className="mb-3">

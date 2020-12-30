@@ -8,6 +8,11 @@ describe("Submission card component", () => {
   const title = "Title";
   const body = "Body";
 
+  beforeEach(() => {
+    // Clear local storage for this card after each test
+    localStorage.removeItem("1VotedUp")
+  })
+
   test("rendering correctly", () => {
     render(
       <BrowserRouter>
@@ -21,6 +26,10 @@ describe("Submission card component", () => {
     expect(screen.getByText("Read")).toBeInTheDocument();
     expect(screen.getAllByRole("button").length).toBe(2);
   });
+
+  test("correctly saving votes in localStorage", () => {
+
+  })
 
   test("only allowing one vote option to be selected", async () => {
     render(
