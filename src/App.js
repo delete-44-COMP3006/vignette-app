@@ -8,9 +8,7 @@ function App() {
   return (
     <BrowserRouter>
       <nav className="d-inline-flex align-items-center justify-content-between w-75">
-        <div className="banner-title">
-          <Link to="/">Vignette</Link>
-        </div>
+        <Link to="/" className="banner-title">Vignette</Link>
 
         <Link to="/write" style={{ fontSize: "2rem" }}>
           Get Writing!
