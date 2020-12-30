@@ -1,4 +1,5 @@
 import React from "react";
+import "../../scss/icons.scss"
 
 function Down(props) {
   return (
@@ -6,7 +7,7 @@ function Down(props) {
       xmlns="http://www.w3.org/2000/svg"
       width={props.size || "16"}
       height={props.size || "16"}
-      fill="#D81B60"
+      fill="currentColor"
       className={`bi bi-caret-down${props.filled ? "-fill" : ""}`}
       viewBox="0 0 16 16"
       onClick={props.onClick}

@@ -1,0 +1,22 @@
+.bi {
+  cursor: pointer;
+  transition: fill 0.1s ease-in;
+}
+
+.bi-caret-up,
+.bi-caret-up-fill {
+  fill: #8fa71a;
+
+  &:hover, &:focus {
+    fill: #7e9219;
+  }
+}
+
+.bi-caret-down,
+.bi-caret-down-fill {
+  fill: #d81b60;
+
+  &:hover, &:focus {
+    fill: #b31851;
+  }
+}
