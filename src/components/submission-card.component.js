@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Up from "./icons/up.icon";
 import Down from "./icons/down.icon";
+import SubmissionDataService from "../services/submission.service";
 import "../scss/submission-card.scss";
 
 function SubmissionCard(props) {
@@ -15,6 +16,28 @@ function SubmissionCard(props) {
     // Otherwise set that they have voted and the direction of their vote
     setHasVoted(hasVoted ? isVoteUp !== votedUp : true);
     setVotedUp(isVoteUp)
+
+    // This function is recreated when state changes, therefore at this point
+    // even though we've updated hasVoted the value of hasVoted is the previous state
+    // -> the function hasn't had a chance to recreate with the new state
+
+    // Therefore when we send "hasVoted" and "votedUp" we are sending the
+    // users *previous* state
+    let params = {
+      hasVoted: hasVoted,
+      previousVote: votedUp,
+      currentVote: isVoteUp
+    };
+
+    const response = SubmissionDataService.update(props.id, params);
+
+    response
+      .then((submission) => {
+        console.log('Here')
+      })
+      .catch((error) => {
+        console.log('Here :(')
+      });
   }
 
   useEffect(() => {

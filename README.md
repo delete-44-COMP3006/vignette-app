@@ -13,7 +13,9 @@ You will also see any lint errors in the console.
 By default, the application is connected to the staging server via an environment variable.
 
 If running the API locally, you should change the environment variable defined in `.env`.\
-to point to `localhost:9000` instead
+to point to `http://localhost:9000` instead
+
+**Important**: make sure you include the `http://`, otherwise the connection will fail
 
 ## Testing
 
