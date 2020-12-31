@@ -8,9 +8,7 @@ function App() {
   return (
     <BrowserRouter>
       <nav className="d-inline-flex align-items-center justify-content-between w-75">
-        <div className="banner-title">
-          <Link to="/">Vignette</Link>
-        </div>
+        <Link to="/" className="banner-title">Vignette</Link>
 
         <Link to="/write" style={{ fontSize: "2rem" }}>
           Get Writing!
@@ -18,7 +16,7 @@ function App() {
       </nav>
 
       <Switch>
-        <Route path="/write" component={New} />
+        <Route exact path="/write" component={New} />
         <Route path="/read/:id" children={<Show />} />
         <Route exact path="/" component={Index} />
       </Switch>

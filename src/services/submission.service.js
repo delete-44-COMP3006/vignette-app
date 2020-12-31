@@ -13,6 +13,10 @@ class SubmissionDataService {
   create(body) {
     return http.post("/submissions", qs.stringify(body));
   }
+
+  update(id, body) {
+    return http.patch(`/submissions/${id}`, qs.stringify(body))
+  }
 }
 
 export default new SubmissionDataService();
