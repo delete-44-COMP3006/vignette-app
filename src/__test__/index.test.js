@@ -27,7 +27,7 @@ describe("Index component", () => {
       content: content3,
       summary: summary,
       _id: 3,
-    }
+    },
   ];
 
   beforeEach(async () => {
@@ -44,7 +44,7 @@ describe("Index component", () => {
           <Index />
         </BrowserRouter>
       );
-    })
+    });
   });
 
   afterEach(() => {
@@ -72,22 +72,60 @@ describe("Index component", () => {
     const sortButton = screen.getByText("Sort Submissions");
 
     // Onload, make request with default -score value
-    expect(http.get).toBeCalledTimes(1)
-    expect(http.get).toBeCalledWith("/submissions", {"params": {"sort": "-score"}});
+    expect(http.get).toBeCalledTimes(1);
+    expect(http.get).toBeCalledWith("/submissions", {
+      params: { sort: "-score" },
+    });
 
     // Change sort order
-    userEvent.click(sortButton)
-    userEvent.click(screen.getByText("Score (lowest to highest)"))
+    userEvent.click(sortButton);
+    userEvent.click(screen.getByText("Score (lowest to highest)"));
 
     // Confirm index request is made again with new sort direction
-    expect(http.get).toBeCalledTimes(2)
-    expect(http.get).toBeCalledWith("/submissions", {"params": {"sort": "score"}})
+    expect(http.get).toBeCalledTimes(2);
+    expect(http.get).toBeCalledWith("/submissions", {
+      params: { sort: "score" },
+    });
 
     // Change sort order
-    userEvent.click(sortButton)
-    userEvent.click(screen.getByText("Score (highest to lowest)"))
+    userEvent.click(sortButton);
+    userEvent.click(screen.getByText("Score (highest to lowest)"));
 
-    expect(http.get).toBeCalledTimes(3)
-    expect(http.get).toBeCalledWith("/submissions", {"params": {"sort": "-score"}})
-  })
+    expect(http.get).toBeCalledTimes(3);
+    expect(http.get).toBeCalledWith("/submissions", {
+      params: { sort: "-score" },
+    });
+  });
+
+  test("changing sort order with tab", async () => {
+    const sortButton = screen.getByText("Sort Submissions");
+
+    // Onload, make request with default -score value
+    expect(http.get).toBeCalledTimes(1);
+    expect(http.get).toBeCalledWith("/submissions", {
+      params: { sort: "-score" },
+    });
+
+    // Confirm dropdown elements are not present
+    expect(screen.queryByText("Score (lowest to highest)")).toBeNull();
+    expect(screen.queryByText("Score (highest to lowest)")).toBeNull();
+
+    // Tab to sortButton
+    userEvent.tab();
+    expect(sortButton).toHaveFocus();
+
+    await act(async () => {
+      // Press space
+      userEvent.type(sortButton, " ", { skipClick: true });
+    });
+
+    // Confirm dropdown elements are shown
+    const ascSort = screen.getByText("Score (lowest to highest)");
+    const descSort = screen.getByText("Score (highest to lowest)");
+
+    expect(ascSort).toBeInTheDocument();
+    expect(descSort).toBeInTheDocument();
+
+    // TODO: Testing dropdown elements response to tab and space
+  });
 });
