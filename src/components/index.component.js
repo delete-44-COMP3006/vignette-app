@@ -2,21 +2,24 @@ import React, { useState, useCallback, useEffect } from "react";
 import SubmissionDataService from "../services/submission.service";
 import SubmissionCard from "./submission-card.component";
 import CardColumns from "react-bootstrap/CardColumns";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 function Index(props) {
   // Define callbacks for GETting and SETting the component state
   const [submissions, setSubmissions] = useState([]);
+  const [sortOrder, setSortOrder] = useState("-score");
 
   // Callback to update the displayed submissions
   const retrieveSubmissions = useCallback(() => {
-    SubmissionDataService.index()
+    SubmissionDataService.index(sortOrder)
       .then((response) => {
         setSubmissions(response.data);
       })
       .catch((e) => {
         console.log(e);
       });
-  }, [setSubmissions]);
+  }, [setSubmissions, sortOrder]);
 
   // Helper function to find the summary text for the submission
   const summaryFor = (submission) => {
@@ -29,13 +32,35 @@ function Index(props) {
     }
   };
 
-  // Fetch list of submissions on load
+  // Fetch list of submissions on load and when sort order changes
   useEffect(() => {
     retrieveSubmissions();
   }, [retrieveSubmissions]);
 
   return (
-    <div className="w-75 ml-auto mr-auto">
+    <div className="w-75 ml-auto mr-auto border-top border-light">
+      <DropdownButton
+        title="Sort Submissions"
+        variant="link"
+        className="text-right mt-2 mb-2 p-0"
+      >
+        <Dropdown.Item
+          active={sortOrder === "-score"}
+          eventKey="-score"
+          onSelect={setSortOrder}
+        >
+          Score (highest to lowest)
+        </Dropdown.Item>
+
+        <Dropdown.Item
+          active={sortOrder === "score"}
+          eventKey="score"
+          onSelect={setSortOrder}
+        >
+          Score (lowest to highest)
+        </Dropdown.Item>
+      </DropdownButton>
+
       <CardColumns>
         {submissions &&
           submissions.map((submission, index) => (
