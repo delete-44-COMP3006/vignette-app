@@ -32,10 +32,6 @@ function Index(props) {
     }
   };
 
-  const onSelect = (key) => {
-    setSortOrder(key);
-  };
-
   // Fetch list of submissions on load and when sort order changes
   useEffect(() => {
     retrieveSubmissions();
@@ -51,7 +47,7 @@ function Index(props) {
         <Dropdown.Item
           active={sortOrder === "-score"}
           eventKey="-score"
-          onSelect={onSelect}
+          onSelect={setSortOrder}
         >
           Score (highest to lowest)
         </Dropdown.Item>
@@ -59,7 +55,7 @@ function Index(props) {
         <Dropdown.Item
           active={sortOrder === "score"}
           eventKey="score"
-          onSelect={onSelect}
+          onSelect={setSortOrder}
         >
           Score (lowest to highest)
         </Dropdown.Item>
