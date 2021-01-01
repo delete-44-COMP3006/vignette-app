@@ -3,6 +3,7 @@ import Index from "../components/index.component";
 import { act } from "react-dom/test-utils";
 import http from "../http-common";
 import { BrowserRouter } from "react-router-dom";
+import userEvent from "@testing-library/user-event";
 
 describe("Index component", () => {
   const content1 = "1".repeat(200);
@@ -29,13 +30,21 @@ describe("Index component", () => {
     }
   ];
 
-  beforeEach(() => {
+  beforeEach(async () => {
     // In each test, stub any GET requests made through the http module with fake submissions
     jest.spyOn(http, "get").mockImplementation(() =>
       Promise.resolve({
         data: submissions,
       })
     );
+
+    await act(async () => {
+      render(
+        <BrowserRouter>
+          <Index />
+        </BrowserRouter>
+      );
+    })
   });
 
   afterEach(() => {
@@ -44,15 +53,6 @@ describe("Index component", () => {
   });
 
   test("rendering a card for each submission", async () => {
-    // Use the asynchronous version of act to apply resolved promises
-    await act(async () => {
-      render(
-        <BrowserRouter>
-          <Index />
-        </BrowserRouter>
-      );
-    });
-
     // Confirm all cards are rendered
     expect(screen.getByText("Submission 1")).toBeInTheDocument();
     expect(screen.getByText("Submission 2")).toBeInTheDocument();
@@ -67,4 +67,27 @@ describe("Index component", () => {
     expect(screen.queryByText(content3)).not.toBeInTheDocument();
     expect(screen.queryByText(summary)).toBeInTheDocument();
   });
+
+  test("changing sort order", () => {
+    const sortButton = screen.getByText("Sort Submissions");
+
+    // Onload, make request with default -score value
+    expect(http.get).toBeCalledTimes(1)
+    expect(http.get).toBeCalledWith("/submissions", {"params": {"sort": "-score"}});
+
+    // Change sort order
+    userEvent.click(sortButton)
+    userEvent.click(screen.getByText("Score (lowest to highest)"))
+
+    // Confirm index request is made again with new sort direction
+    expect(http.get).toBeCalledTimes(2)
+    expect(http.get).toBeCalledWith("/submissions", {"params": {"sort": "score"}})
+
+    // Change sort order
+    userEvent.click(sortButton)
+    userEvent.click(screen.getByText("Score (highest to lowest)"))
+
+    expect(http.get).toBeCalledTimes(3)
+    expect(http.get).toBeCalledWith("/submissions", {"params": {"sort": "-score"}})
+  })
 });
