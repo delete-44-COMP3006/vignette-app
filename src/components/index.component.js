@@ -69,6 +69,22 @@ function Index(props) {
         >
           Score (lowest to highest)
         </Dropdown.Item>
+
+        <Dropdown.Item
+          active={sortOrder === "createdAt"}
+          eventKey="createdAt"
+          onSelect={setSortOrder}
+        >
+          Date (oldest to newest)
+        </Dropdown.Item>
+
+        <Dropdown.Item
+          active={sortOrder === "-createdAt"}
+          eventKey="-createdAt"
+          onSelect={setSortOrder}
+        >
+          Date (newest to oldest)
+        </Dropdown.Item>
       </DropdownButton>
 
       {submissions.length > 0 ? (
