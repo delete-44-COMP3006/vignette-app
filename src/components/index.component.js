@@ -3,6 +3,7 @@ import SubmissionDataService from "../services/submission.service";
 import SubmissionCard from "./submission-card.component";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import Spinner from "react-bootstrap/Spinner";
 import Masonry from "react-masonry-css";
 import "../scss/index.scss"
 
@@ -70,6 +71,7 @@ function Index(props) {
         </Dropdown.Item>
       </DropdownButton>
 
+    {submissions.length > 0 ? (
       <Masonry
         breakpointCols={columnBreakpoints}
         className="card-grid"
@@ -85,6 +87,12 @@ function Index(props) {
             />
           ))}
       </Masonry>
+            ) : (
+              <div className="w-100 text-center">
+
+              <Spinner animation="border" role="status" />
+              </div>
+            )}
     </div>
   );
 }
