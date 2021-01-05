@@ -38,13 +38,18 @@ nav {
   }
 
   nav {
-    display: none;
+    display: inline-flex;
+    background-color: transparent;
+    position: relative;
     margin-left: 12.5%;
+    width: 75%;
+    align-items: baseline;
   }
 
   .subtle {
     color: $light;
     font-size: 0.85rem;
+    display: block;
   }
 
   body {
