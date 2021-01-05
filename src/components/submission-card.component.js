@@ -4,7 +4,6 @@ import Card from "react-bootstrap/Card";
 import Up from "./icons/up.icon";
 import Down from "./icons/down.icon";
 import SubmissionDataService from "../services/submission.service";
-import "../scss/submission-card.scss";
 
 function SubmissionCard(props) {
   // Define callbacks for GETting and SETting the votes
@@ -54,7 +53,7 @@ function SubmissionCard(props) {
   }, [votedUp, hasVoted, props.id]);
 
   return (
-    <Card style={{ maxWidth: "21rem" }} className="mb-3">
+    <Card style={{ width: "20rem" }} className="m-lg-3 mb-3">
       <Card.Body>
         <Card.Title>
           <Link to={`/read/${props.id}`}>{props.title}</Link>
