@@ -8,9 +8,22 @@ body {
 }
 
 .banner-title {
-  font-size: 6rem;
+  display: none;
 }
 
 nav {
   margin-left: 12.5%;
+}
+
+// Bootstrap "lg" breakpoint
+@media (min-width: 992px) {
+  .banner-title {
+    display: inline-block;
+    font-size: 6rem;
+  }
+}
+
+.btn {
+  margin-top: 1rem;
+  font-size: 1.5rem;
 }
