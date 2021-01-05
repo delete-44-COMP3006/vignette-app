@@ -34,7 +34,7 @@ function Show(props) {
     <div className="w-75 ml-auto mr-auto text-center">
       {title ? (
         <div>
-          <h1 className="submission-title">{title}</h1>
+          <h2 className="submission-title">{title}</h2>
           <p className="submission-content">{content}</p>
 
           <Link to="/" style={{ fontSize: "1.25rem" }}>

@@ -1,11 +1,24 @@
 .submission-title {
-  font-size: 4rem;
+  font-size: 2rem;
   border-bottom: 1px solid;
+  margin-top: 1rem;
 }
 
 .submission-content {
   font-size: 1.25rem;
-  padding: 3rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid;
   white-space: pre-wrap;
+}
+
+// Bootstrap "lg" breakpoint
+@media (min-width: 992px) {
+  .submission-title {
+    font-size: 4rem;
+    margin-top: 0;
+  }
+
+  .submission-content {
+    padding: 3rem 0;
+  }
 }
