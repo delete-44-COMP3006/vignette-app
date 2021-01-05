@@ -13,12 +13,14 @@ function App() {
           Vignette
         </Link>
 
-    <div>
-    <Link to="/write" tabIndex={-1}>
-          <Button className="w-100">Get Writing!</Button>
-        </Link>
-        <p className="subtle">You can use ctrl + q instead of clicking this!</p>
-    </div>
+        <div>
+          <Link to="/write" tabIndex={-1}>
+            <Button className="w-100">Get Writing!</Button>
+          </Link>
+          <p className="subtle">
+            You can use ctrl + q instead of clicking this!
+          </p>
+        </div>
       </nav>
 
       <Switch>

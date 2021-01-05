@@ -52,9 +52,13 @@ function Index(props) {
   };
 
   // On press of ctrl + q:
-  useKeypress("q", () => {
-    history.push("/write");
-  }, [history]);
+  useKeypress(
+    "q",
+    () => {
+      history.push("/write");
+    },
+    [history]
+  );
 
   return (
     <div className="w-75 ml-auto mr-auto border-top border-light">
