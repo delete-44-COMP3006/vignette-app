@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import SubmissionDataService from "../services/submission.service";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../scss/new.scss";
 
 function New(props) {
@@ -94,9 +94,17 @@ function New(props) {
           <Form.Text className="float-right">{wordCount}/500</Form.Text>
         </Form.Group>
 
-        <Button type="submit" className="w-100">
-          Submit!
-        </Button>
+        <Form.Group>
+          <Button type="submit" className="w-100">
+            Submit!
+          </Button>
+
+          <Link to="/" tabIndex={-1}>
+            <Button variant="secondary" className="w-100">
+              Cancel
+            </Button>
+          </Link>
+        </Form.Group>
       </Form>
     </div>
   );
