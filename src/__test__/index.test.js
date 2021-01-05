@@ -95,6 +95,26 @@ describe("Index component", () => {
     expect(http.get).toBeCalledWith("/submissions", {
       params: { sort: "-score" },
     });
+
+    // Change sort order
+    userEvent.click(sortButton);
+    userEvent.click(screen.getByText("Date (oldest to newest)"));
+
+    // Confirm index request is made again with new sort direction
+    expect(http.get).toBeCalledTimes(4);
+    expect(http.get).toBeCalledWith("/submissions", {
+      params: { sort: "createdAt" },
+    });
+
+    // Change sort order
+    userEvent.click(sortButton);
+    userEvent.click(screen.getByText("Date (newest to oldest)"));
+
+    // Confirm index request is made again with new sort direction
+    expect(http.get).toBeCalledTimes(5);
+    expect(http.get).toBeCalledWith("/submissions", {
+      params: { sort: "-createdAt" },
+    });
   });
 
   test("changing sort order with tab", async () => {

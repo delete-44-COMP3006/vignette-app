@@ -17,7 +17,7 @@ describe("New component", () => {
         <New />
       </BrowserRouter>
     );
-  })
+  });
 
   test("rendering correct fields", () => {
     expect(
