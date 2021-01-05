@@ -56,7 +56,7 @@ function Index(props) {
       <DropdownButton
         title="Sort Submissions"
         variant="link"
-        className="text-right mt-2 mb-2 p-0"
+        className="text-lg-right text-center mt-lg-2 mb-2 p-0"
       >
         <Dropdown.Item
           active={sortOrder === "-score"}

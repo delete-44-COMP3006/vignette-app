@@ -8,14 +8,14 @@ import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 function App() {
   return (
     <BrowserRouter>
-      <nav className="d-flex flex-wrap flex-lg-nowrap d-lg-inline-flex align-items-center justify-content-center justify-content-md-between w-75 mb-1">
-        <Link to="/" className="banner-title">
+      <nav>
+      <Link to="/" className="banner-title">
           Vignette
         </Link>
 
         <div>
           <Link to="/write" tabIndex={-1}>
-            <Button className="w-100">Get Writing!</Button>
+            <Button className="w-100 m-0">Get Writing!</Button>
           </Link>
           <p className="subtle">
             You can use ctrl + q instead of clicking this!
