@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import SubmissionDataService from "../services/submission.service";
+import ConfirmModal from "./confirm_modal.component";
 import { Link, useHistory } from "react-router-dom";
 import "../scss/new.scss";
 
@@ -12,6 +13,7 @@ function New(props) {
   const [content, setContent] = useState("");
   const [wordCount, setWordCount] = useState(0);
   const [errors, setErrors] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const history = useHistory();
 
@@ -29,12 +31,13 @@ function New(props) {
 
   const createSubmission = useCallback(
     (e) => {
-      e.preventDefault();
-      let params = {
+      const params = {
         title: title,
         summary: summary,
         content: content,
       };
+
+      setIsModalVisible(false);
 
       const response = SubmissionDataService.create(params);
 
@@ -49,6 +52,11 @@ function New(props) {
     [title, summary, content, history]
   );
 
+  const submitForm = (e) => {
+    e.preventDefault();
+    setIsModalVisible(true);
+  };
+
   return (
     <div className="w-75 ml-auto mr-auto">
       {errors &&
@@ -58,7 +66,7 @@ function New(props) {
           </Alert>
         ))}
 
-      <Form onSubmit={createSubmission}>
+      <Form onSubmit={submitForm}>
         <Form.Group>
           <Form.Control
             type="text"
@@ -106,6 +114,16 @@ function New(props) {
           </Link>
         </Form.Group>
       </Form>
+
+      <ConfirmModal
+        visible={isModalVisible}
+        title="Submit story?"
+        text={`This will publish your story and it will be live to the general public for the next 30 days. Are you sure you want to continue?`}
+        confirmAction={() => {
+          createSubmission();
+        }}
+        closeAction={() => setIsModalVisible(false)}
+      ></ConfirmModal>
     </div>
   );
 }
