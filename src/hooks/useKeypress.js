@@ -8,7 +8,7 @@ export default function useKeypress(key, action) {
     function onKeyDown(e) {
       // If event key matches the key assigned on hook creation,
       // run agiven action
-      if (e.key === key) {
+      if (e.key === key && e.ctrlKey) {
         e.preventDefault();
         action();
       }
