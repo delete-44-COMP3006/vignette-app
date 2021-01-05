@@ -6,8 +6,9 @@ import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 
 describe("New component", () => {
-  const modalTitleText = "Submit story?"
-  const modalBodyText = "This will publish your story and it will be live to the general public for the next 30 days. Are you sure you want to continue?"
+  const modalTitleText = "Submit story?";
+  const modalBodyText =
+    "This will publish your story and it will be live to the general public for the next 30 days. Are you sure you want to continue?";
 
   const clear = (field) => {
     userEvent.type(field, "{selectall}{backspace}");
@@ -104,7 +105,7 @@ describe("New component", () => {
 
       // Cancel submission
       await act(async () => {
-        userEvent.click(screen.getByText('Back'));
+        userEvent.click(screen.getByText("Back"));
       });
 
       // Confirm submission was cancelled - no errors are present, modal is hidden
@@ -124,14 +125,14 @@ describe("New component", () => {
 
       // Confirm submission
       await act(async () => {
-        userEvent.click(screen.getByText('OK'));
+        userEvent.click(screen.getByText("OK"));
       });
 
       // Confirm submission was submitted, rendering errors
       expect(screen.getByText("Test error message")).toBeVisible();
       expect(screen.queryByText(modalTitleText)).toBeNull();
       expect(screen.queryByText(modalBodyText)).toBeNull();
-    })
+    });
 
     test("rendering error messages", async () => {
       const submitButton = screen.getByText("Submit!");
@@ -142,7 +143,7 @@ describe("New component", () => {
 
       const modalTitle = screen.getByText(modalTitleText);
       const modalBody = screen.getByText(modalBodyText);
-      const modalOk = screen.getByText('OK');
+      const modalOk = screen.getByText("OK");
 
       expect(modalTitle).toBeVisible();
       expect(modalBody).toBeVisible();
