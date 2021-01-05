@@ -5,7 +5,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "react-bootstrap/Spinner";
 import Masonry from "react-masonry-css";
-import "../scss/index.scss"
+import "../scss/index.scss";
 
 function Index(props) {
   // Define callbacks for GETting and SETting the component state
@@ -44,8 +44,8 @@ function Index(props) {
     default: 4,
     1100: 3,
     700: 2,
-    500: 1
-  }
+    500: 1,
+  };
 
   return (
     <div className="w-75 ml-auto mr-auto border-top border-light">
@@ -71,28 +71,27 @@ function Index(props) {
         </Dropdown.Item>
       </DropdownButton>
 
-    {submissions.length > 0 ? (
-      <Masonry
-        breakpointCols={columnBreakpoints}
-        className="card-grid"
-        columnClassName="card-grid_column"
-      >
-        {submissions &&
-          submissions.map((submission, index) => (
-            <SubmissionCard
-              id={submission._id}
-              title={submission.title}
-              body={summaryFor(submission)}
-              key={submission._id}
-            />
-          ))}
-      </Masonry>
-            ) : (
-              <div className="w-100 text-center">
-
-              <Spinner animation="border" role="status" />
-              </div>
-            )}
+      {submissions.length > 0 ? (
+        <Masonry
+          breakpointCols={columnBreakpoints}
+          className="card-grid"
+          columnClassName="card-grid_column"
+        >
+          {submissions &&
+            submissions.map((submission, index) => (
+              <SubmissionCard
+                id={submission._id}
+                title={submission.title}
+                body={summaryFor(submission)}
+                key={submission._id}
+              />
+            ))}
+        </Masonry>
+      ) : (
+        <div className="w-100 text-center">
+          <Spinner animation="border" role="status" />
+        </div>
+      )}
     </div>
   );
 }

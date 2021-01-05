@@ -1,12 +1,12 @@
 import React from "react";
-import "../../scss/icons.scss"
+import "../../scss/icons.scss";
 
 function Up(props) {
   const onKeyDown = (e) => {
     if (e.key === " " || e.key === "Enter") {
       props.onClick();
     }
-  }
+  };
 
   return (
     <svg
