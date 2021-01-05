@@ -5,9 +5,8 @@ import useKeypress from "../hooks/useKeypress";
 import { useHistory } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import CardDeck from "react-bootstrap/CardDeck";
 import Spinner from "react-bootstrap/Spinner";
-import Masonry from "react-masonry-css";
-import "../scss/index.scss";
 
 function Index(props) {
   // Define callbacks for GETting and SETting the component state
@@ -42,14 +41,6 @@ function Index(props) {
   useEffect(() => {
     retrieveSubmissions();
   }, [retrieveSubmissions]);
-
-  // Breakpoints for columns - when screen reaches y width, display x columns
-  const columnBreakpoints = {
-    default: 4,
-    1100: 3,
-    700: 2,
-    500: 1,
-  };
 
   // On press of ctrl + q:
   useKeypress(
@@ -101,11 +92,7 @@ function Index(props) {
       </DropdownButton>
 
       {submissions.length > 0 ? (
-        <Masonry
-          breakpointCols={columnBreakpoints}
-          className="card-grid"
-          columnClassName="card-grid_column"
-        >
+        <CardDeck className="d-flex flex-wrap">
           {submissions &&
             submissions.map((submission, index) => (
               <SubmissionCard
@@ -115,7 +102,7 @@ function Index(props) {
                 key={submission._id}
               />
             ))}
-        </Masonry>
+        </CardDeck>
       ) : (
         <div className="w-100 text-center">
           <Spinner animation="border" role="status" />
