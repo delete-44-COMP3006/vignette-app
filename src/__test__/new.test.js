@@ -3,6 +3,7 @@ import { act } from "react-dom/test-utils";
 import New from "../components/new.component";
 import http from "../http-common";
 import userEvent from "@testing-library/user-event";
+import { BrowserRouter } from "react-router-dom";
 
 describe("New component", () => {
   const clear = (field) => {
@@ -10,9 +11,15 @@ describe("New component", () => {
     expect(field.value).toEqual("");
   };
 
-  test("rendering correct fields", () => {
-    render(<New />);
+  beforeEach(() => {
+    render(
+      <BrowserRouter>
+        <New />
+      </BrowserRouter>
+    );
+  })
 
+  test("rendering correct fields", () => {
     expect(
       screen.getByPlaceholderText("Name your submission")
     ).toBeInTheDocument();
@@ -28,8 +35,6 @@ describe("New component", () => {
   });
 
   test("word counter", () => {
-    render(<New />);
-
     const contentsField = screen.getByPlaceholderText("Write!");
 
     // Confirm starting state
@@ -77,8 +82,6 @@ describe("New component", () => {
     });
 
     test("rendering error messages", async () => {
-      render(<New />);
-
       const submitButton = screen.getByText("Submit!");
 
       await act(async () => {
