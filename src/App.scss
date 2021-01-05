@@ -5,19 +5,28 @@ body {
   font-family: "Khula", sans-serif;
   line-height: 1.6;
   font-size: 1.25rem;
+  margin-top: 5rem;
 }
 
 .banner-title {
-  display: none;
+  font-size: 2rem;
+  margin-left: 0.25rem;
+  color: $light;
 }
 
 nav {
-  margin-left: 12.5%;
+  background-color: $primary;
+  z-index: 1010;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
 }
 
 .subtle {
-  color: $light;
-  font-size: 0.85rem;
+  display: none;
 }
 
 // Bootstrap "lg" breakpoint
@@ -25,6 +34,21 @@ nav {
   .banner-title {
     display: inline-block;
     font-size: 6rem;
+    color: $primary;
+  }
+
+  nav {
+    display: none;
+    margin-left: 12.5%;
+  }
+
+  .subtle {
+    color: $light;
+    font-size: 0.85rem;
+  }
+
+  body {
+    margin-top: 0;
   }
 }
 
