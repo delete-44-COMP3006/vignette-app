@@ -1,11 +1,13 @@
 import React, { useState, useCallback, useEffect } from "react";
 import SubmissionDataService from "../services/submission.service";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
+import useKeypress from "../hooks/useKeypress";
 import Spinner from "react-bootstrap/Spinner";
 import "../scss/show.scss";
 
 function Show(props) {
-  let { id } = useParams();
+  const { id } = useParams();
+  const history = useHistory();
 
   // Define callbacks for GETting and SETting the title and content to show
   const [title, setTitle] = useState(null);
@@ -24,6 +26,15 @@ function Show(props) {
         console.log(e);
       });
   }, [id, setTitle, setContent]);
+
+  // On press of ctrl + q:
+  useKeypress(
+    "q",
+    () => {
+      history.push("/write");
+    },
+    [history]
+  );
 
   // Fetch submission on load
   useEffect(() => {

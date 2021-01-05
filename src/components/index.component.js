@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import SubmissionDataService from "../services/submission.service";
 import SubmissionCard from "./submission-card.component";
+import useKeypress from "../hooks/useKeypress";
+import { useHistory } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "react-bootstrap/Spinner";
@@ -11,6 +13,8 @@ function Index(props) {
   // Define callbacks for GETting and SETting the component state
   const [submissions, setSubmissions] = useState([]);
   const [sortOrder, setSortOrder] = useState("-score");
+
+  const history = useHistory();
 
   // Callback to update the displayed submissions
   const retrieveSubmissions = useCallback(() => {
@@ -46,6 +50,15 @@ function Index(props) {
     700: 2,
     500: 1,
   };
+
+  // On press of ctrl + q:
+  useKeypress(
+    "q",
+    () => {
+      history.push("/write");
+    },
+    [history]
+  );
 
   return (
     <div className="w-75 ml-auto mr-auto border-top border-light">
