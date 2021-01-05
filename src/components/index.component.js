@@ -1,9 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
 import SubmissionDataService from "../services/submission.service";
 import SubmissionCard from "./submission-card.component";
-import CardColumns from "react-bootstrap/CardColumns";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import Spinner from "react-bootstrap/Spinner";
+import Masonry from "react-masonry-css";
+import "../scss/index.scss";
 
 function Index(props) {
   // Define callbacks for GETting and SETting the component state
@@ -37,6 +39,14 @@ function Index(props) {
     retrieveSubmissions();
   }, [retrieveSubmissions]);
 
+  // Breakpoints for columns - when screen reaches y width, display x columns
+  const columnBreakpoints = {
+    default: 4,
+    1100: 3,
+    700: 2,
+    500: 1,
+  };
+
   return (
     <div className="w-75 ml-auto mr-auto border-top border-light">
       <DropdownButton
@@ -61,17 +71,27 @@ function Index(props) {
         </Dropdown.Item>
       </DropdownButton>
 
-      <CardColumns>
-        {submissions &&
-          submissions.map((submission, index) => (
-            <SubmissionCard
-              id={submission._id}
-              title={submission.title}
-              body={summaryFor(submission)}
-              key={submission._id}
-            />
-          ))}
-      </CardColumns>
+      {submissions.length > 0 ? (
+        <Masonry
+          breakpointCols={columnBreakpoints}
+          className="card-grid"
+          columnClassName="card-grid_column"
+        >
+          {submissions &&
+            submissions.map((submission, index) => (
+              <SubmissionCard
+                id={submission._id}
+                title={submission.title}
+                body={summaryFor(submission)}
+                key={submission._id}
+              />
+            ))}
+        </Masonry>
+      ) : (
+        <div className="w-100 text-center">
+          <Spinner animation="border" role="status" />
+        </div>
+      )}
     </div>
   );
 }

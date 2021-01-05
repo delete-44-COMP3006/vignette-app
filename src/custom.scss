@@ -29,11 +29,13 @@ $table-bg-scale: -50%;
   text-overflow: ellipsis;
 }
 
-a, .btn-link {
-  transition: color .15s ease-in;
+a,
+.btn-link {
+  transition: color 0.15s ease-in;
   text-decoration: none;
 
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     color: $primary-darken;
     text-decoration: underline;
   }

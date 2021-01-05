@@ -8,14 +8,18 @@ import "../scss/submission-card.scss";
 
 function SubmissionCard(props) {
   // Define callbacks for GETting and SETting the votes
-  const [hasVoted, setHasVoted] = useState(localStorage.getItem(`${props.id}VotedUp`) !== null);
-  const [votedUp, setVotedUp] = useState(localStorage.getItem(`${props.id}VotedUp`) === "true");
+  const [hasVoted, setHasVoted] = useState(
+    localStorage.getItem(`${props.id}VotedUp`) !== null
+  );
+  const [votedUp, setVotedUp] = useState(
+    localStorage.getItem(`${props.id}VotedUp`) === "true"
+  );
 
   const vote = (isVoteUp) => {
     // If user has voted on this card previously and are making the same vote again, remove their vote
     // Otherwise set that they have voted and the direction of their vote
     setHasVoted(hasVoted ? isVoteUp !== votedUp : true);
-    setVotedUp(isVoteUp)
+    setVotedUp(isVoteUp);
 
     // This function is recreated when state changes, therefore at this point
     // even though we've updated hasVoted the value of hasVoted is the previous state
@@ -26,28 +30,28 @@ function SubmissionCard(props) {
     let params = {
       hasVoted: hasVoted,
       previousVote: votedUp,
-      currentVote: isVoteUp
+      currentVote: isVoteUp,
     };
 
     const response = SubmissionDataService.update(props.id, params);
 
     response
       .then((submission) => {
-        console.log('Here')
+        console.log("Here");
       })
       .catch((error) => {
-        console.log('Here :(')
+        console.log("Here :(");
       });
-  }
+  };
 
   useEffect(() => {
     // When users voting status for this card changes, update or remove their vote from localStorage
     if (hasVoted) {
-      localStorage.setItem(`${props.id}VotedUp`, votedUp)
+      localStorage.setItem(`${props.id}VotedUp`, votedUp);
     } else {
-      localStorage.removeItem(`${props.id}VotedUp`)
+      localStorage.removeItem(`${props.id}VotedUp`);
     }
-  }, [votedUp, hasVoted, props.id])
+  }, [votedUp, hasVoted, props.id]);
 
   return (
     <Card style={{ maxWidth: "21rem" }} className="mb-3">
@@ -58,9 +62,21 @@ function SubmissionCard(props) {
         <Card.Text>{props.body}</Card.Text>
 
         <span className="d-inline-flex justify-content-around w-100">
-          <Up size="24" filled={hasVoted && votedUp} onClick={() => {vote(true)}} />
+          <Up
+            size="24"
+            filled={hasVoted && votedUp}
+            onClick={() => {
+              vote(true);
+            }}
+          />
           <Link to={`/read/${props.id}`}>Read</Link>
-          <Down size="24" filled={hasVoted && !votedUp} onClick={() => {vote(false)}}/>
+          <Down
+            size="24"
+            filled={hasVoted && !votedUp}
+            onClick={() => {
+              vote(false);
+            }}
+          />
         </span>
       </Card.Body>
     </Card>

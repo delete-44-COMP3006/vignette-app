@@ -6,7 +6,7 @@ function Down(props) {
     if (e.key === " " || e.key === "Enter") {
       props.onClick();
     }
-  }
+  };
 
   return (
     <svg

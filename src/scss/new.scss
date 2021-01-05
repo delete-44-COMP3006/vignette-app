@@ -3,6 +3,16 @@
 }
 
 .form-control,
-.btn {
-  font-size: 1.5rem;
+button[type="submit"],
+.btn-secondary {
+  font-size: 1rem;
+}
+
+// Bootstrap "lg" breakpoint
+@media (min-width: 992px) {
+  .form-control,
+  button[type="submit"],
+  .btn-secondary {
+    font-size: 1.5rem;
+  }
 }
