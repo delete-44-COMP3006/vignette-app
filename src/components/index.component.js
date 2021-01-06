@@ -98,6 +98,7 @@ function Index(props) {
               <SubmissionCard
                 id={submission._id}
                 title={submission.title}
+                award={submission.award}
                 body={summaryFor(submission)}
                 key={submission._id}
               />

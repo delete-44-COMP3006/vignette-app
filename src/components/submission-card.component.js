@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Up from "./icons/up.icon";
 import Down from "./icons/down.icon";
+import Award from "./icons/award.icon";
 import SubmissionDataService from "../services/submission.service";
 
 function SubmissionCard(props) {
@@ -32,15 +33,17 @@ function SubmissionCard(props) {
       currentVote: isVoteUp,
     };
 
-    const response = SubmissionDataService.update(props.id, params);
+    SubmissionDataService.update(props.id, params);
+  };
 
-    response
-      .then((submission) => {
-        console.log("Here");
-      })
-      .catch((error) => {
-        console.log("Here :(");
-      });
+  const renderAward = () => {
+    if (props.award !== "none") {
+      return (
+        <Card.Subtitle>
+          <Award type={props.award} />
+        </Card.Subtitle>
+      );
+    }
   };
 
   useEffect(() => {
@@ -58,6 +61,9 @@ function SubmissionCard(props) {
         <Card.Title>
           <Link to={`/read/${props.id}`}>{props.title}</Link>
         </Card.Title>
+
+        {renderAward()}
+
         <Card.Text>{props.body}</Card.Text>
 
         <span className="d-inline-flex justify-content-around w-100">
