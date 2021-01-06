@@ -2,10 +2,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Khula:wght@300&display=swap");
 
 body {
-  font-family: "Khula", sans-serif;
-  line-height: 1.6;
-  font-size: 1.25rem;
-  margin-top: 5rem;
+  // Override bootstrap defaults
+  font-family: "Khula", sans-serif !important;
+  line-height: 1.6 !important;
+  font-size: 1.25rem !important;
+  margin-top: 5rem !important;
 }
 
 .banner-title {
@@ -27,6 +28,10 @@ nav {
 
 .subtle {
   display: none;
+}
+
+button {
+  font-size: 1.5rem !important;
 }
 
 // Bootstrap "lg" breakpoint
@@ -53,7 +58,7 @@ nav {
   }
 
   body {
-    margin-top: 0;
+    margin-top: 0 !important;
   }
 }
 

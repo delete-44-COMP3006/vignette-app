@@ -1,3 +1,5 @@
+@import "../custom";
+
 .form-group {
   margin-bottom: 1rem;
 }
@@ -6,6 +8,17 @@
 button[type="submit"],
 .btn-secondary {
   font-size: 1rem;
+}
+
+.hint {
+  text-align: center;
+  width: 100%;
+  display: block;
+  background-color: $primary;
+  color: $dark;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
 }
 
 // Bootstrap "lg" breakpoint
