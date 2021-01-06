@@ -1,9 +1,10 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import SubmissionDataService from "../services/submission.service";
 import ConfirmModal from "./confirm_modal.component";
+import io from "socket.io-client";
 import { Link, useHistory } from "react-router-dom";
 import "../scss/new.scss";
 
@@ -14,6 +15,7 @@ function New(props) {
   const [wordCount, setWordCount] = useState(0);
   const [errors, setErrors] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [hint, setHint] = useState("");
 
   const history = useHistory();
 
@@ -57,6 +59,21 @@ function New(props) {
     setIsModalVisible(true);
   };
 
+  useEffect(() => {
+    const socket = io(process.env.REACT_APP_API_URL);
+    socket.on("writingHint", (hint) => {
+      setHint(hint);
+    });
+
+    return () => socket.disconnect();
+  }, []);
+
+  const renderHint = () => {
+    if (hint !== "") {
+      return <span className="hint">{hint}</span>;
+    }
+  };
+
   return (
     <div className="w-75 ml-auto mr-auto">
       {errors &&
@@ -91,6 +108,8 @@ function New(props) {
         </Form.Group>
 
         <Form.Group>
+          {renderHint()}
+
           <Form.Control
             as="textarea"
             rows={10}
