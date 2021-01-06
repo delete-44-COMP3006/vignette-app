@@ -37,14 +37,14 @@ function SubmissionCard(props) {
   };
 
   const renderAward = () => {
-    if(props.award !== "none"){
-      return(
+    if (props.award !== "none") {
+      return (
         <Card.Subtitle>
-        <Award type={props.award} />
-      </Card.Subtitle>
-      )
+          <Award type={props.award} />
+        </Card.Subtitle>
+      );
     }
-  }
+  };
 
   useEffect(() => {
     // When users voting status for this card changes, update or remove their vote from localStorage
