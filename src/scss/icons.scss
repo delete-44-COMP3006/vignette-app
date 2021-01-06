@@ -1,4 +1,7 @@
-.bi {
+.bi-caret-up,
+.bi-caret-up-fill,
+.bi-caret-down,
+.bi-caret-down-fill {
   cursor: pointer;
   transition: fill 0.1s ease-in;
 }
@@ -21,4 +24,20 @@
   &:focus {
     fill: #b31851;
   }
+}
+
+.card-subtitle {
+  text-transform: capitalize;
+}
+
+.bi-star {
+  fill: #915f16;
+}
+
+.bi-star-half {
+  fill: #929292;
+}
+
+.bi-star-fill {
+  fill: #ddd900;
 }
