@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Award from "../../components/icons/Award.icon";
+import Award from "../../components/icons/award.icon";
 
 describe("Award icon", () => {
   test("changing filled state", () => {
