@@ -7,6 +7,7 @@ describe("Submission card component", () => {
   const id = 1;
   const title = "Title";
   const body = "Body";
+  const award = "silver";
 
   afterEach(() => {
     // Clear local storage for this card after each test
@@ -96,11 +97,29 @@ describe("Submission card component", () => {
     expect(downIcon).toHaveClass("bi-caret-down-fill");
   });
 
+  test("confirming no icon is rendered when no award is given", () => {
+    render(
+      <BrowserRouter>
+        <SubmissionCard id={id} title={title} body={body} award="none" />
+      </BrowserRouter>
+    );
+
+    // Confirm all typical elements are rendered
+    expect(screen.getByText(title)).toBeInTheDocument();
+    expect(screen.getByText(body)).toBeInTheDocument();
+    expect(screen.getByText("Read")).toBeInTheDocument();
+    expect(screen.getAllByRole("button").length).toBe(2);
+
+    // Confirm award is not rendered
+    expect(screen.queryByRole("complementary")).toBeNull();
+    expect(screen.queryByText("award")).toBeNull();
+  });
+
   describe("functionality", () => {
     beforeEach(() => {
       render(
         <BrowserRouter>
-          <SubmissionCard id={id} title={title} body={body} />
+          <SubmissionCard id={id} title={title} body={body} award={award} />
         </BrowserRouter>
       );
     });
@@ -111,6 +130,10 @@ describe("Submission card component", () => {
       expect(screen.getByText(body)).toBeInTheDocument();
       expect(screen.getByText("Read")).toBeInTheDocument();
       expect(screen.getAllByRole("button").length).toBe(2);
+
+      // Confirm award is rendered
+      expect(screen.getByRole("complementary")).toBeVisible();
+      expect(screen.getByText("silver award")).toBeVisible();
     });
 
     test("only allowing one vote option to be selected", async () => {
