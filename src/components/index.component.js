@@ -7,11 +7,13 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import CardDeck from "react-bootstrap/CardDeck";
 import Spinner from "react-bootstrap/Spinner";
+import io from "socket.io-client";
 
 function Index(props) {
   // Define callbacks for GETting and SETting the component state
   const [submissions, setSubmissions] = useState([]);
   const [sortOrder, setSortOrder] = useState("-score");
+  const [connectedUsers, setConnectedUsers] = useState(0);
 
   const history = useHistory();
 
@@ -37,6 +39,15 @@ function Index(props) {
     }
   };
 
+  useEffect(() => {
+    const socket = io(process.env.REACT_APP_API_URL);
+    socket.on("userCount", (userCount) => {
+      setConnectedUsers(userCount);
+    });
+
+    return () => socket.disconnect();
+  }, []);
+
   // Fetch list of submissions on load and when sort order changes
   useEffect(() => {
     retrieveSubmissions();
@@ -53,43 +64,47 @@ function Index(props) {
 
   return (
     <div className="w-75 ml-auto mr-auto border-top border-light">
-      <DropdownButton
-        title="Sort Submissions"
-        variant="link"
-        className="text-lg-right text-center mt-lg-2 mb-2 p-0"
-      >
-        <Dropdown.Item
-          active={sortOrder === "-score"}
-          eventKey="-score"
-          onSelect={setSortOrder}
-        >
-          Score (highest to lowest)
-        </Dropdown.Item>
+      <span className="d-lg-inline-flex text-center justify-content-between w-100 align-items-end mt-1 mb-2">
+        <p>Connected Users: {connectedUsers}</p>
 
-        <Dropdown.Item
-          active={sortOrder === "score"}
-          eventKey="score"
-          onSelect={setSortOrder}
+        <DropdownButton
+          title="Sort Submissions"
+          variant="link"
+          className="text-lg-right p-0"
         >
-          Score (lowest to highest)
-        </Dropdown.Item>
+          <Dropdown.Item
+            active={sortOrder === "-score"}
+            eventKey="-score"
+            onSelect={setSortOrder}
+          >
+            Score (highest to lowest)
+          </Dropdown.Item>
 
-        <Dropdown.Item
-          active={sortOrder === "createdAt"}
-          eventKey="createdAt"
-          onSelect={setSortOrder}
-        >
-          Date (oldest to newest)
-        </Dropdown.Item>
+          <Dropdown.Item
+            active={sortOrder === "score"}
+            eventKey="score"
+            onSelect={setSortOrder}
+          >
+            Score (lowest to highest)
+          </Dropdown.Item>
 
-        <Dropdown.Item
-          active={sortOrder === "-createdAt"}
-          eventKey="-createdAt"
-          onSelect={setSortOrder}
-        >
-          Date (newest to oldest)
-        </Dropdown.Item>
-      </DropdownButton>
+          <Dropdown.Item
+            active={sortOrder === "createdAt"}
+            eventKey="createdAt"
+            onSelect={setSortOrder}
+          >
+            Date (oldest to newest)
+          </Dropdown.Item>
+
+          <Dropdown.Item
+            active={sortOrder === "-createdAt"}
+            eventKey="-createdAt"
+            onSelect={setSortOrder}
+          >
+            Date (newest to oldest)
+          </Dropdown.Item>
+        </DropdownButton>
+      </span>
 
       {submissions.length > 0 ? (
         <CardDeck className="d-flex flex-wrap">
