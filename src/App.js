@@ -9,7 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <nav>
-      <Link to="/" className="banner-title">
+        <Link to="/" className="banner-title">
           Vignette
         </Link>
 
