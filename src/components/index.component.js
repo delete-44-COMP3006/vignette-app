@@ -65,12 +65,12 @@ function Index(props) {
   return (
     <div className="w-75 ml-auto mr-auto border-top border-light">
       <span className="d-lg-inline-flex text-center justify-content-between w-100 align-items-end mt-1 mb-2">
-        <p>Connected Users: {connectedUsers}</p>
+        <p className="mb-0">Connected Users: {connectedUsers}</p>
 
         <DropdownButton
           title="Sort Submissions"
           variant="link"
-          className="text-lg-right p-0"
+          className="text-lg-right"
         >
           <Dropdown.Item
             active={sortOrder === "-score"}
